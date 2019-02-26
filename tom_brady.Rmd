@@ -1,0 +1,24 @@
+---
+title: "Tom Brady"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Tom Brady recently won his 6th Superbowl as the quarterback of the New England Patriots. Many have speculated that what makes Brady so good is his performance in the biggest situations, like the playoffs. We want to check if Brady actually throws for more yards in playoff games than he does in regular season games.
+
+The 'brady.csv3' file contains data from all of Brady’s games and includes the following columns:
+
+* game_type: Either “Regular” or “Playoff” indicating which type of game was played
+* yards: Number of yards Tom Brady threw for in the game
+
+Given this data, we have the following hypotheses:
+* H0:μplayoff=μregular
+* Ha:μplayoff>μregular
+
+1. Find the difference in the average yards thrown for in playoff vs regular season games (5 points) 
+2. Perform a permutation test with 10,000 samples and store the results in a vector (15 points) 
+3. Calculate the p value for the observed difference in average yards thrown and its 95% confidence interval (10 points) 
+4. Based on your results, does Tom Brady pass for more yards per game in the playoffs when compared to the regular season? (5 points)

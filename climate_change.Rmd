@@ -1,0 +1,24 @@
+---
+title: "Climate Change"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Climate change is an ongoing issue that scientists frequently debate about. Though there are many factors which contribute to rising average temperatures across the United States, one claim is that crude oil consumption directly affects the rising temperatures. As statisticians, we understand that both variables are observational, meaning that there can be correlation between the two variables, but causation cannot be concluded. Thus, for this study, we are interested in discovering whether there is significant correlation between crude oil consumption levels and average temperature readings. The dataset 'oil-temp.csv' has been provided and contains the following variables:
+
+year: Measurement year
+crude_oil_consumption1: Total annual US crude oil imports measured in thousands of barrels
+temp_change2: Average change in US temperatures by degrees Fahrenheit
+
+Given this data, our hypotheses are as follows:
+ * H0:cor=0
+ * Ha:cor≠0
+
+Calculate the actual correlation coefficient between crude_oil_consumption and temp_change (5 points)
+Perform a permutation test with 10,000 samples and store the results in a vector (15 points)
+Create a histogram of your permutation test results and include a red line for the actual correlation value (10 points)
+Calculate the p value for the observed correlation coefficient and its 95% confidence interval (10 points)
+What do you conclude? (5 points)

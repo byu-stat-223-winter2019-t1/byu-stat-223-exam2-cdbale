@@ -1,0 +1,19 @@
+---
+title: "Seatbelts"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The built-in R dataset Seatbelts contains details about driver deaths and injuries in Great Britain from Jan 1969 to Dec 1984. More information about the data can be accessed by running ?Seatbelts. Use the following line of code to load this data into R as a data.frame:
+
+seatbelts <- as.data.frame(Seatbelts)
+This data contains 8 columns and 192 rows of data. The law column is either a 0 or 1 indicating whether or not a law was in place requiring a seatbelt to be worn. We want to know if this law had an impact on the proportion of drivers who were killed out of those who were seriously injured. This proportion is calculated by dividing DriversKilled by drivers.
+
+* Calculate the observed difference in proportion of drivers killed when the law was in
+effect and when it was not in effect (10 points)
+* Calculate 10,000 bootstrapped differences in proportions and store the results in a vector (15 points)
+* Based on the results from step 2, calculate a 95% confidence interval on the difference in proportion of drivers killed (10 points)
+* Based on your results, did the law improve the proportion of injured drivers who were killed? (5 points)

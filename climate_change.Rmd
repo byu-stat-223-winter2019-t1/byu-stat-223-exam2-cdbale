@@ -11,7 +11,7 @@ Climate change is an ongoing issue that scientists frequently debate about. Thou
 
 year: Measurement year
 crude_oil_consumption1: Total annual US crude oil imports measured in thousands of barrels
-temp_change2: Average change in US temperatures by degrees Fahrenheit
+temp_change: Average change in US temperatures by degrees Fahrenheit
 
 Given this data, our hypotheses are as follows:
  * H0:cor=0
@@ -22,3 +22,66 @@ Perform a permutation test with 10,000 samples and store the results in a vector
 Create a histogram of your permutation test results and include a red line for the actual correlation value (10 points)
 Calculate the p value for the observed correlation coefficient and its 95% confidence interval (10 points)
 What do you conclude? (5 points)
+
+***
+
+Load packages.
+```{r}
+library(tidyverse)
+```
+
+***
+
+Import data.
+```{r}
+oil <- read_csv('oil-temp.csv')
+```
+
+Viewing data.
+```{r}
+head(oil)
+```
+
+Let's calculate the true correlation between temperature and crude oil consumption.
+```{r}
+(samp_corr <- oil %>%
+  summarize(Correlation = cor(crude_oil_consumption, temp_change)))
+samp_corr <- samp_corr %>%
+  pull()
+```
+
+Since the correlation is between oil consumption and temperature on a yearly basis, if we
+randomize temperatures, it will break the correlation and create data that fits our null
+hypothesis. I'll do this using the 'tidyverse' by creating 10,000 samples of our original
+data, then permuting the 'temp_change' variable for each sample then calculating the
+correlation between 'temp_change' and 'crude_oil_consumption' for each sample.
+```{r}
+perm_corrs <- oil %>%
+  rep_sample_n(size = nrow(oil), reps = 10000) %>%
+  group_by(replicate) %>%
+  mutate(perm_temp = sample(temp_change)) %>%
+  summarize(Correlation = cor(crude_oil_consumption, perm_temp))
+```
+
+Plot the correlation values under the null hypothesis and include a red verticle line at
+the correlation we calculated from our actual sample.
+```{r}
+perm_corrs %>%
+  ggplot(aes(x = Correlation)) +
+  geom_density() +
+  geom_vline(xintercept = samp_corr, col = 'red') +
+  labs(y = 'Density',
+       title = 'Distribution of Correlation Values Under Null Hypothesis')
+```
+
+Calculate the p-value and 95% confidence interval for the observed correlation coefficient.
+```{r}
+perm_corrs %>%
+  summarize(P_Value = mean(Correlation >= samp_corr),
+            Lower_Bound = P_Value - qnorm(0.975) * sqrt(P_Value * (1 - P_Value) / n()),
+            Upper_Bound = P_Value + qnorm(0.975) * sqrt(P_Value * (1 - P_Value) / n()))
+```
+
+Based on this permutation test, we can conclude that the observed correlation between
+crude oil consumption and average yearly temperature change is greater than 0 at a 
+statistically significant level.

@@ -82,6 +82,7 @@ perm_corrs %>%
             Upper_Bound = P_Value + qnorm(0.975) * sqrt(P_Value * (1 - P_Value) / n()))
 ```
 
-Based on this permutation test, we can conclude that the observed correlation between
+Since our null hypothesis is that the correlation is not equal to zero, we are conducting a two sided test. To be significant, we would need to have a p-value of less 0.025 (alpha = 0.05) Based on this permutation test, we can conclude that the observed correlation between
 crude oil consumption and average yearly temperature change is greater than 0 at a 
-statistically significant level.
+statistically significant level since the p-value is much smaller than 0.025 and the 
+95% confidence interval that we calculated does not contain the cutoff value of 0.025.

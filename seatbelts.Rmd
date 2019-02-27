@@ -7,7 +7,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The built-in R dataset Seatbelts contains details about driver deaths and injuries in Great Britain from Jan 1969 to Dec 1984. More information about the data can be accessed by running ?Seatbelts. Use the following line of code to load this data into R as a data.frame:
+The built-in R dataset Seatbelts contains details about driver deaths and injuries in Great Britain from Jan 1969 to Dec 1984. More information about the data can be accessed by running ?Seatbelts.
 
 This data contains 8 columns and 192 rows of data. The law column is either a 0 or 1 indicating whether or not a law was in place requiring a seatbelt to be worn. We want to know if this law had an impact on the proportion of drivers who were killed out of those who were seriously injured. This proportion is calculated by dividing DriversKilled by drivers.
 
@@ -77,9 +77,11 @@ boot_diffs %>%
   geom_vline(xintercept = c(ci$Lower_Bound, ci$Upper_Bound), col = 'red') +
   labs(x = 'Difference',
        y = 'Density',
-       title = 'Distribution of Differences in Proportion of Drivers Killed')
+       title = 'Distribution of Differences in Proportion of Drivers Killed With 95% CI')
 ```
 
 Based on the confidence interval from the bootstrap samples, we cannot conclude that the
 law improved the proportion of drivers that are killed in crashes since the 95% confidence
-interval around the difference in proportion of drivers killed contains 0.
+interval around the difference in proportion of drivers killed contains 0. Besides that, our
+observed difference in proportions shows that a higher proportion of drivers were killed
+after the law went into effect.

@@ -28,6 +28,7 @@ What do you conclude? (5 points)
 Load packages.
 ```{r}
 library(tidyverse)
+library(infer)
 ```
 
 ***
